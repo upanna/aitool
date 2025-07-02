@@ -3,90 +3,139 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Buddhist Research AI Tools</title>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-functions-compat.js"></script>
+  <title>Buddhist AI Research Tools</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       background-color: #f5f5f5;
       margin: 0;
       padding: 0;
+      line-height: 1.6;
+      color: #333;
     }
     header {
-      background-color: #00695c;
+      background-color: #00695c; /* Dark Green */
       color: white;
-      padding: 20px;
+      padding: 30px 20px; /* Adjust padding to give more space */
       text-align: center;
       position: relative;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
-    h5 {
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+    p.tagline {
+      font-size: 1.1em;
+      opacity: 0.9;
+      margin-bottom: 20px; /* Added margin for spacing */
+    }
+    h5.creator-info {
       text-align: right;
+      font-size: 0.8em;
+      color: rgba(255, 255, 255, 0.7);
+      margin-top: 30px; /* More space for creator info */
     }
-    .chatbox-container {
-      margin-top: 20px;
-      display: flex;
-      justify-content: center;
+
+    /* CSE native elements များကို AI Chat Box input/button ပုံစံအတိုင်း ပြင်ဆင်ခြင်း */
+    .gsc-control-cse {
+      padding: 0 !important;
+      width: 100%; /* Make search control take full width of its container */
+      display: flex; /* Flexbox for aligning input and button */
+      align-items: center; /* Vertically center items */
+      gap: 10px; /* Space between input and button */
     }
-    .chatbox {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      background-color: #004d40;
-      padding: 10px;
-      border-radius: 10px;
+    .gsc-search-box {
+      margin-bottom: 0 !important;
+      flex-grow: 1; /* Allow input to grow and take available space */
     }
-    .chatbox input {
-      padding: 15px;
-      border-radius: 3px;
-      border: none;
-      width: 300px;
+    input.gsc-input {
+      padding: 15px !important; /* AI Chat Box input ရဲ့ padding ကို ယူထားတာ */
+      border-radius: 3px !important; /* AI Chat Box input ရဲ့ border-radius ကို ယူထားတာ */
+      border: none !important; /* border ဖယ်ရှားခြင်း */
+      height: auto !important;
+      min-height: unset !important;
+      box-sizing: border-box;
+      font-size: 1em !important; /* AI Chat Box input ရဲ့ font-size ကို ယူထားတာ */
+      outline: none; /* Remove default outline on focus */
     }
-    .chatbox button {
-      padding: 10px 15px;
-      border-radius: 5px;
-      border: none;
-      background-color: #0288d1;
-      color: white;
+    button.gsc-search-button {
+      padding: 10px 15px !important; /* AI Chat Box button ရဲ့ padding ကို ယူထားတာ */
+      border-radius: 5px !important; /* AI Chat Box button ရဲ့ border-radius ကို ယူထားတာ */
+      border: none !important; /* border ဖယ်ရှားခြင်း */
+      background-color: #0288d1 !important; /* Blue button */
+      color: white !important;
       cursor: pointer;
+      font-size: 1em !important; /* AI Chat Box button ရဲ့ font-size ကို ယူထားတာ */
+      min-width: unset !important;
+      height: unset !important;
     }
-    #chatResponse {
-      margin-top: 10px;
-      color: #ffffff;
-      font-style: italic;
-      text-align: center;
+    .gsc-input-box { /* The container for the input field and search button */
+      border: none !important; /* Remove default border from gsc-input-box */
+      box-shadow: none !important; /* Remove default shadow */
+      background: transparent !important; /* Make background transparent */
     }
+    .gsc-search-button-v2 {
+        padding: 0 10px !important; /* Icon button padding */
+        background-color: #0288d1 !important;
+        border-radius: 5px !important;
+    }
+    .gsc-search-button-v2 svg {
+        fill: white !important;
+    }
+    /* Hide the default Google branding and other texts */
+    .gsc-branding, .gsc-overflow-check {
+        display: none !important;
+    }
+
+    /* Main Content Grid */
     .container {
-      padding: 20px;
+      padding: 25px;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Auto-fit columns for responsiveness */
+      gap: 25px;
+      max-width: 1100px;
+      margin: 25px auto;
     }
     .card {
       background-color: white;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      transition: transform 0.2s;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
     .card:hover {
-      transform: translateY(-5px);
+      transform: translateY(-8px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
     }
     .card h3 {
       margin-top: 0;
       color: #00695c;
+      font-size: 1.4em;
+      margin-bottom: 10px;
+    }
+    .card p {
+      font-size: 0.95em;
+      color: #555;
+      flex-grow: 1;
     }
     .card a {
       display: inline-block;
-      margin-top: 10px;
+      margin-top: 15px;
       color: #0288d1;
       text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s ease;
     }
     .card a:hover {
       text-decoration: underline;
+      color: #0277bd;
     }
     .card.full-width {
-      grid-column: 1 / -1;
+      grid-column: 1 / -1; /* Take full width of the grid */
       padding: 0;
       overflow: hidden;
     }
@@ -94,21 +143,80 @@
       width: 100%;
       height: 800px;
       border: none;
+      border-radius: 12px;
+    }
+
+    /* Responsive adjustments for smaller screens (mobile) */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2em; /* Adjust H1 font size for mobile */
+      }
+      p.tagline {
+        font-size: 1em;
+      }
+      header {
+        padding: 20px 15px; /* Adjust header padding for mobile */
+      }
+      .gcse-search-container-main {
+        width: calc(100% - 30px); /* Full width minus padding on mobile */
+        padding: 10px 15px; /* Adjust padding for mobile */
+      }
+      input.gsc-input {
+        padding: 12px !important; /* Adjust input padding for mobile */
+      }
+      button.gsc-search-button {
+        padding: 8px 12px !important; /* Adjust button padding for mobile */
+      }
+      .container {
+        padding: 15px; /* Adjust main container padding for mobile */
+        gap: 15px; /* Adjust gap between cards for mobile */
+      }
+      .card {
+        padding: 15px; /* Adjust card padding for mobile */
+      }
+      .card h3 {
+        font-size: 1.2em; /* Adjust card title font size for mobile */
+      }
+      .card p {
+        font-size: 0.9em; /* Adjust card paragraph font size for mobile */
+      }
+      .card a {
+        font-size: 0.9em; /* Adjust card link font size for mobile */
+      }
+      .card.full-width iframe {
+        height: 500px; /* Adjust iframe height for mobile */
+      }
+    }
+
+    /* Even smaller screens (e.g., old phones) */
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.8em;
+      }
+      .gcse-search-container-main {
+        padding: 8px 10px;
+      }
+      input.gsc-input {
+        font-size: 0.9em !important;
+      }
+      button.gsc-search-button {
+        font-size: 0.9em !important;
+      }
     }
   </style>
 </head>
 <body>
   <header>
     <h1>Buddhist Academic AI Research Tools</h1>
-    <p>Explore and utilize AI-powered platforms for Buddhist studies and research</p>
-    <div class="chatbox-container">
-      <div class="chatbox">
-        <input type="text" id="chatInput" placeholder="Ask anything...">
-        <button onclick="sendMessage()">Ok</button>
-      </div>
+    <p class="tagline">Explore and utilize AI-powered platforms for Buddhist studies and research</p>
+    
+    <!-- Google Custom Search Engine (CSE) - Main Search Box -->
+    <div class="gcse-search-container-main">
+        <script async src="https://cse.google.com/cse.js?cx=d620609ec350f4548"></script>
+        <div class="gcse-search"></div>
     </div>
-    <div id="chatResponse"></div>
-    <h5>Created by U Pannasiri<br/>DBU(Bago)</h5>
+    
+    <h5 class="creator-info">Created by U Pannasiri<br/>DBU(Bago)</h5>
   </header>
 
   <div class="container">
@@ -126,7 +234,11 @@
       <h3>Perplexity AI</h3>
       <p>Search engine powered by AI with scholarly citation support and academic mode.</p>
       <a href="https://www.perplexity.ai" target="_blank">Visit Perplexity</a>
-    
+    </div>
+    <div class="card">
+      <h3>Buddha AI</h3>
+      <p>An AI assistant specifically designed for answering questions and providing insights on Buddhist teachings and scriptures.</p>
+      <a href="https://example.com/buddha-ai" target="_blank">Visit Buddha AI</a>
     </div>
     <div class="card">
       <h3>Zotero</h3>
@@ -158,46 +270,5 @@
     </div>
   </div>
 
-  <script>
-    // Firebase config
-    const firebaseConfig = {
-      apiKey: "AIzaSyAVZ6w99iS7OtryUlaJXovJhQWU-yZ2iKU",
-      authDomain: "login-ca153.firebaseapp.com",
-      databaseURL: "https://login-ca153.firebaseio.com",
-      projectId: "login-ca153",
-      storageBucket: "login-ca153.appspot.com",
-      messagingSenderId: "649333708701",
-      appId: "1:649333708701:web:e6b081e65c3cc546b34174",
-      measurementId: "G-SJ62R2SJDG"
-    };
-
-    firebase.initializeApp(firebaseConfig);
-    const functions = firebase.functions();
-
-    function sendMessage() {
-      const input = document.getElementById('chatInput');
-      const message = input.value.trim();
-      const responseBox = document.getElementById('chatResponse');
-      responseBox.style.color = "#ffffff";
-
-      if (!message) return;
-
-      input.value = '';
-      responseBox.textContent = 'Thinking...';
-
-      const askAI = functions.httpsCallable('askAI');
-      askAI({ prompt: message })
-        .then(result => {
-          responseBox.style.color = "#ffffff";
-          responseBox.textContent = "AI says: " + result.data.reply;
-        })
-        .catch(error => {
-          console.error("AI connection error:", error);
-          responseBox.style.color = "#ffcc00";
-          // ဤနေရာတွင် Link ကို တိုက်ရိုက် ထည့်သွင်းထားသည်
-          responseBox.innerHTML = 'AI ချိတ်ဆက်မှု အဆင်မပြေပါ။ Character AI သို့ တိုက်ရိုက်သွားရန်: <a href="https://character.ai/chat/0nrkb7cVO7x-FiTA8S5bfEFYIxIDQupy-O6w-XSw6GM" target="_blank" style="color:#ffcc00;">Character AI Chat</a>';
-        });
-    }
-  </script>
 </body>
 </html>
