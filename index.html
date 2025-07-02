@@ -126,6 +126,7 @@
       <h3>Perplexity AI</h3>
       <p>Search engine powered by AI with scholarly citation support and academic mode.</p>
       <a href="https://www.perplexity.ai" target="_blank">Visit Perplexity</a>
+    
     </div>
     <div class="card">
       <h3>Zotero</h3>
@@ -193,7 +194,8 @@
         .catch(error => {
           console.error("AI connection error:", error);
           responseBox.style.color = "#ffcc00";
-          responseBox.textContent = "⚠️ ဦးပညာသီရိ(ဓမ္မဒူတဗုဒ္ဓတက္ကသိုလ်၊ ပဲခူး) မှ Upgrade ပြုလုပ်နေပါသဖြင့် ယာယီပိတ်ထားပါသည်.";
+          // ဤနေရာတွင် Link ကို တိုက်ရိုက် ထည့်သွင်းထားသည်
+          responseBox.innerHTML = 'AI ချိတ်ဆက်မှု အဆင်မပြေပါ။ Character AI သို့ တိုက်ရိုက်သွားရန်: <a href="https://character.ai/chat/0nrkb7cVO7x-FiTA8S5bfEFYIxIDQupy-O6w-XSw6GM" target="_blank" style="color:#ffcc00;">Character AI Chat</a>';
         });
     }
   </script>
