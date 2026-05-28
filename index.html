@@ -3,16 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ဗုဒ္ဓဘာသာဆိုင်ရာ AI သုတေသနပြုကိရိယာများ</title>
+  <title>ဗုဒ္ဓစာပေဆိုင်ရာ AI သုတေသနပြုကိရိယာများ</title>
   <style>
     /* Modern Typography & Reset */
     @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@300;400;500;700&display=swap');
 
-    body {
-      font-family: 'Noto Sans Myanmar', Arial, sans-serif;
-      background-color: #fdfbf7; /* ဖုန်ကတ္တီပါရောင်နု */
+    * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
+    }
+
+    body {
+      font-family: 'Noto Sans Myanmar', Arial, sans-serif;
+      background-color: #fcfaf2; /* သဘာဝဆန်သော နောက်ခံရောင်နု */
       line-height: 1.8;
       color: #2d3436;
     }
@@ -21,7 +25,7 @@
     header {
       background: linear-gradient(135deg, #4a020d 0%, #700918 50%, #a87e24 100%);
       color: white;
-      padding: 40px 20px;
+      padding: 50px 20px;
       text-align: center;
       position: relative;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
@@ -29,11 +33,10 @@
     }
 
     h1 {
-      font-size: 2.3em;
-      margin-bottom: 10px;
+      font-size: 2.4em;
+      margin-bottom: 12px;
       font-weight: 700;
       text-shadow: 0 2px 4px rgba(0,0,0,0.4);
-      color: #fff;
     }
 
     p.tagline {
@@ -49,10 +52,9 @@
       max-width: 650px;
       margin: 0 auto 15px auto;
       background: rgba(255, 255, 255, 0.15);
-      padding: 10px;
+      padding: 8px;
       border-radius: 30px;
       backdrop-filter: blur(5px);
-      box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
     }
 
     h5.creator-info {
@@ -60,89 +62,74 @@
       font-size: 0.85em;
       color: rgba(255, 255, 255, 0.85);
       margin-top: 20px;
-      max-width: 1100px;
+      max-width: 1200px;
       margin-left: auto;
       margin-right: auto;
       font-weight: 400;
-      line-height: 1.5;
     }
 
-    /* CSE native elements customization */
+    /* CSE customization */
     .gsc-control-cse {
       padding: 0 !important;
       width: 100%;
       display: flex;
       align-items: center;
-      gap: 10px;
       background: transparent !important;
       border: none !important;
     }
-
-    .gsc-search-box {
-      margin-bottom: 0 !important;
-      flex-grow: 1;
-    }
-
+    .gsc-search-box { margin-bottom: 0 !important; flex-grow: 1; }
     input.gsc-input {
       padding: 12px 20px !important;
       border-radius: 25px !important;
       border: none !important;
-      height: auto !important;
-      box-sizing: border-box;
-      font-size: 1em !important;
-      outline: none;
       background: #ffffff !important;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1) !important;
     }
-
-    .gsc-input-box {
-      border: none !important;
-      box-shadow: none !important;
-      background: transparent !important;
-    }
-
+    .gsc-input-box { border: none !important; box-shadow: none !important; background: transparent !important; }
     .gsc-search-button-v2 {
       padding: 12px 22px !important;
-      background-color: #a87e24 !important; /* Gold Button */
+      background-color: #a87e24 !important;
       border-radius: 25px !important;
       border: 1px solid #fff !important;
-      transition: background 0.3s ease;
+    }
+    .gsc-branding, .gsc-overflow-check { display: none !important; }
+
+    /* Main Container & Category Sections */
+    .main-wrapper {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
     }
 
-    .gsc-search-button-v2:hover {
-      background-color: #bd9033 !important;
+    .category-title {
+      color: #700918;
+      font-size: 1.6em;
+      margin: 40px 0 20px 0;
+      padding-bottom: 8px;
+      border-bottom: 3px solid #a87e24;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    .gsc-search-button-v2 svg {
-      fill: white !important;
-    }
-
-    .gsc-branding, .gsc-overflow-check {
-      display: none !important;
-    }
-
-    /* Main Content Grid */
-    .container {
-      padding: 30px 20px;
+    .grid-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 25px;
-      max-width: 1100px;
-      margin: 20px auto;
     }
 
+    /* Premium Card Design */
     .card {
       background-color: white;
       padding: 25px;
       border-radius: 16px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+      transition: all 0.3s ease;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      border: 1px solid #f0e6cc;
+      border: 1px solid #efe8d4;
       position: relative;
-      overflow: hidden;
     }
 
     .card::before {
@@ -152,36 +139,40 @@
       left: 0;
       width: 4px;
       height: 100%;
-      background-color: #700918; /* ကတ္တီပါနီ ကတ်ဘေးလိုင်း */
+      background-color: #700918;
     }
 
     .card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 10px 25px rgba(112, 9, 24, 0.1);
+      box-shadow: 0 12px 25px rgba(112, 9, 24, 0.1);
       border-color: #a87e24;
     }
 
     .card-meta {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       margin-bottom: 12px;
     }
 
     .card-icon {
-      font-size: 1.5em;
+      font-size: 1.6em;
+      background: #fff8eb;
+      padding: 5px 10px;
+      border-radius: 8px;
+      border: 1px solid #f2e6cc;
     }
 
     .card h3 {
       margin: 0;
       color: #700918;
-      font-size: 1.3em;
+      font-size: 1.25em;
       font-weight: 700;
     }
 
     .card p {
       font-size: 0.95em;
-      color: #555;
+      color: #444;
       flex-grow: 1;
       text-align: justify;
       margin-bottom: 20px;
@@ -189,15 +180,15 @@
 
     .card a {
       display: inline-block;
-      padding: 10px 18px;
-      background-color: #fcf8ee;
+      padding: 10px 15px;
+      background-color: #fdfaf2;
       color: #a87e24;
       text-decoration: none;
       font-weight: bold;
       border-radius: 8px;
-      text-center: center;
+      text-align: center;
       transition: all 0.3s ease;
-      border: 1px solid #f0e6cc;
+      border: 1px solid #efe8d4;
       font-size: 0.9em;
     }
 
@@ -207,21 +198,28 @@
       border-color: #a87e24;
     }
 
-    /* Responsive adjustments */
+    footer {
+      background-color: #4a020d;
+      color: #f1ebd9;
+      text-align: center;
+      padding: 25px 0;
+      margin-top: 60px;
+      border-top: 3px solid #a87e24;
+      font-size: 0.9em;
+    }
+
     @media (max-width: 768px) {
       h1 { font-size: 1.8em; }
-      p.tagline { font-size: 1em; }
       header { padding: 30px 15px; }
-      .container { padding: 15px; gap: 20px; }
-      .card { padding: 20px; }
+      .category-title { font-size: 1.3em; }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>ဗုဒ္ဓစာပေဆိုင်ရာ AI သုတေသနပြုစနစ်များ</h1>
-    <p class="tagline">ဗုဒ္ဓေဘာသာစာပေ လေ့လာခြင်းနှင့် သုတေသနလုပ်ငန်းများအတွက် အဆင့်မြင့် AI နည်းပညာများကို စုစည်းမှု</p>
+    <h1>ဗုဒ္ဓစာပေနှင့် အထွေထွေ AI သုတေသနပြုကိရိယာများ</h1>
+    <p class="tagline">ကမ္ဘာတစ်ဝန်းရှိ အဆင့်မြင့် AI စနစ်များနှင့် ပညာရပ်ဆိုင်ရာ သုတေသန Tool များအားလုံးကို စုံလင်စွာစုစည်းမှု</p>
     
     <div class="gcse-search-container-main">
         <script async src="https://cse.google.com/cse.js?cx=d620609ec350f4548"></script>
@@ -231,97 +229,193 @@
     <h5 class="creator-info">Created by U Pannasiri<br/>DBU(Bago)</h5>
   </header>
 
-  <div class="container">
-    
-    <div class="card">
-      <div>
-        <div class="card-meta">
-          <span class="card-icon">🔍</span>
-          <h3>Elicit.org</h3>
+  <div class="main-wrapper">
+
+    <div class="category-title">📂 ပညာရပ်ဆိုင်ရာ ကျမ်းကိုးနှင့် AI ရှာဖွေရေးအင်ဂျင်များ</div>
+    <div class="grid-container">
+      
+      <div class="card">
+        <div>
+          <div class="card-meta"><span class="card-icon">🔍</span><h3>Elicit.org</h3></div>
+          <p>သုတေသနစာတမ်းများထဲမှ ပညာရပ်ဆိုင်ရာ အဖြေများနှင့် ကိုးကားချက် အထောက်အထားများကို လွယ်ကူစွာ ရှာဖွေထုတ်ယူပေးမည့် AI လက်ထောက်စနစ် ဖြစ်ပါသည်။</p>
         </div>
-        <p>သုတေသနစာတမ်းများထဲမှ ပညာရပ်ဆိုင်ရာ အဖြေများနှင့် ကိုးကားချက် အထောက်အထားများကို လွယ်ကူစွာ ရှာဖွေထုတ်ယူပေးမည့် AI လက်ထောက်စနစ် ဖြစ်ပါသည်။</p>
+        <a href="https://elicit.org" target="_blank">Elicit သို့ဝင်ရန် →</a>
       </div>
-      <a href="https://elicit.org" target="_blank">Elicit သို့ဝင်ရန် →</a>
+
+      <div class="card">
+        <div>
+          <div class="card-meta"><span class="card-icon">🤖</span><h3>Perplexity AI</h3></div>
+          <p>ခိုင်လုံသော စာတမ်းကိုးကားချက်များကို စက္ကန့်ပိုင်းအတွင်း ရှာဖွေဖော်ပြပေးနိုင်သည့် Scholarly Mode ပါဝင်သော အဆင့်မြင့် AI Search Engine ဖြစ်ပါသည်။</p>
+        </div>
+        <a href="https://www.perplexity.ai" target="_blank">Perplexity သို့ဝင်ရန် →</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <div class="card-meta"><span class="card-icon">🎓</span><h3>Google Scholar</h3></div>
+          <p>ဗုဒ္ဓဘာသာလေ့လာမှုဆိုင်ရာ ပညာရပ်ဆိုင်ရာ ဆောင်းပါးများ၊ စာတမ်းများနှင့် စာအုပ်စာတမ်းများကို အလွယ်တကူ ရှာဖွေနိုင်သည့် ကမ္ဘာသုံးအင်ဂျင် ဖြစ်ပါသည်။</p>
+        </div>
+        <a href="https://scholar.google.com" target="_blank">Google Scholar သို့ဝင်ရန် →</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <div class="card-meta"><span class="card-icon">🧬</span><h3>Consensus AI</h3></div>
+          <p>သိပ္ပံနှင့် ပညာရပ်ဆိုင်ရာ မေးခွန်းများကို မေးမြန်းလျှင် စာတမ်းပေါင်းများစွာကို ဖြတ်သန်းရှာဖွေပြီး ယုံကြည်စိတ်ချရသော သုတေသနအဖြေများကို ထုတ်ပေးသည့် AI ဖြစ်ပါသည်။</p>
+        </div>
+        <a href="https://consensus.app" target="_blank">Consensus သို့ဝင်ရန် →</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <div class="card-meta"><span class="card-icon">🔎</span><h3>SciSpace (Typeset)</h3></div>
+          <p>သုတေသနစာတမ်းများကို ဖတ်ရှုရာတွင် နားမလည်သည့် သင်္ကေတ သို့မဟုတ် စာသားများကို AI ဖြင့် ချက်ချင်းရှင်းလင်းပေးပြီး၊ စာတမ်းဖတ်ရလွယ်ကူအောင် ကူညီပေးမည့် Tool ဖြစ်ပါသည်။</p>
+        </div>
+        <a href="https://typeset.io" target="_blank">SciSpace သို့ဝင်ရန် →</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <div class="card-meta"><span class="card-icon">🌐</span><h3>Semantic Scholar</h3></div>
+          <p>AI စနစ်သုံး အခမဲ့ သုတေသနရှာဖွေရေး အင်ဂျင်ဖြစ်ပြီး၊ စာတမ်းများအကြား အရေးကြီးသော ဆက်စပ်မှုများနှင့် လွှမ်းမိုးမှုရှိသော စာတမ်းများကို ရှာဖွေပေးပါသည်။</p>
+        </div>
+        <a href="https://www.semanticscholar.org" target="_blank">Semantic Scholar သို့ဝင်ရန် →</a>
+      </div>
+
     </div>
 
-    <div class="card">
-      <div>
-        <div class="card-meta">
-          <span class="card-icon">🪷</span>
-          <h3>SuttaCentral</h3>
+    <div class="category-title">🪷 ဗုဒ္ဓစာပေနှင့် ကျမ်းစာအထောက်အကူပြုစနစ်များ</div>
+    <div class="grid-container">
+
+      <div class="card">
+        <div>
+          <div class="card-meta"><span class="card-icon">📜</span><h3>SuttaCentral</h3></div>
+          <p>ထေရဝါဒ၊ မဟာယာနနှင့် ဝဇီရယာန ဓမ္မဘာသာပြန်ကျမ်းစာများကို ဘာသာစကားမျိုးစုံဖြင့် တိုက်ရိုက်ဖတ်ရှုလေ့လာနိုင်သော ပိဋကတ်စာပေဗဟိုချက် ဖြစ်ပါသည်။</p>
         </div>
-        <p>ထေရဝါဒ၊ မဟာယာနနှင့် ဝဇီရယာန ဓမ္မဘာသာပြန်ကျမ်းစာများကို ဘာသာစကားမျိုးစုံဖြင့် တိုက်ရိုက်ဖတ်ရှုလေ့လာနိုင်သော ပိဋကတ်စာပေဗဟိုချက် ဖြစ်ပါသည်။</p>
+        <a href="https://suttacentral.net" target="_blank">SuttaCentral သို့ဝင်ရန် →</a>
       </div>
-      <a href="https://suttacentral.net" target="_blank">SuttaCentral သို့ဝင်ရန် →</a>
+
+      <div class="card">
+        <div>
+          <div class="card-meta"><span class="card-icon">🕸️</span><h3>Connected Papers</h3></div>
+          <p>မိမိဖတ်ရှုနေသော စာတမ်းနှင့် ဆက်စပ်နေသည့် အခြားသော ကျမ်းကိုးစာတမ်းများကို ကွန်ရက်မြေပုံသဏ္ဌာန်ဖြင့် အမြင်အာရုံစိုက် ရှာဖွေပေးသည့် စနစ် ဖြစ်ပါသည်။</p>
+        </div>
+        <a href="https://www.connectedpapers.com" target="_blank">Connected Papers သို့ဝင်ရန် →</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <div class="card-meta"><span class="card-icon">🗂️</span><h3>ResearchRabbit</h3></div>
+          <p>သုတေသနလောက၏ Spotify ဟု တင်စားကြပြီး၊ စာတမ်းများကို စိတ်ကြိုက် Collection လုပ်ကာ စာတမ်းများ၏ ချိတ်ဆက်မှုကွန်ရက်ကို အလွယ်တကူ ရှာဖွေပေးနိုင်သည့် AI ဖြစ်ပါသည်။</p>
+        </div>
+        <a href="https://www.researchrabbit.ai" target="_blank">ResearchRabbit သို့ဝင်ရန် →</a>
+      </div>
+
     </div>
 
-    <div class="card">
-      <div>
-        <div class="card-meta">
-          <span class="card-icon">🤖</span>
-          <h3>Perplexity AI</h3>
+    <div class="category-title">💬 နက်ရှိုင်းသော အတွေးအခေါ်နှင့် ဆွေးနွေးရေး AI Chatbots</div>
+    <div class="grid-container">
+
+      <div class="card">
+        <div>
+          <div class="card-meta"><span class="card-icon">🦜</span><h3>Claude.ai</h3></div>
+          <p>နက်ရှိုင်းလှသော ဒဿနပိုင်းဆိုင်ရာများနှင့် ပညာရပ်ဆိုင်ရာ အချက်အလက်များကို ဆွေးနွေးမေးမြန်းရန် အထူးသင့်လျော်သော AI စကားပြောလက်ထောက် ဖြစ်ပါသည်။</p>
         </div>
-        <p>ခိုင်လုံသော စာတမ်းကိုးကားချက်များကို စက္ကန့်ပိုင်းအတွင်း ရှာဖွေဖော်ပြပေးနိုင်သည့် Scholarly Mode ပါဝင်သော အဆင့်မြင့် AI Search Engine ဖြစ်ပါသည်။</p>
+        <a href="https://claude.ai" target="_blank">Claude သို့ဝင်ရန် →</a>
       </div>
-      <a href="https://www.perplexity.ai" target="_blank">Perplexity သို့ဝင်ရန် →</a>
+
+      <div class="card">
+        <div>
+          <div class="card-meta"><span class="card-icon">🧠</span><h3>ChatGPT (OpenAI)</h3></div>
+          <p>ကမ္ဘာသုံး အစွမ်းထက်ဆုံး AI စနစ်ဖြစ်ပြီး စာပေဘာသာပြန်ခြင်း၊ စာတမ်းအကျဉ်းချုပ်ခြင်းနှင့် ဗုဒ္ဓဘာသာဆိုင်ရာ အချက်အလက်များကို အခြေခံဆွေးနွေးရာတွင် အသုံးဝင်ပါသည်။</p>
+        </div>
+        <a href="https://chatgpt.com" target="_blank">ChatGPT သို့ဝင်ရန် →</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <div class="card-meta"><span class="card-icon">💎</span><h3>Google Gemini</h3></div>
+          <p>Google ရဲ့ တရားဝင် အဆင့်မြင့် AI စနစ်ဖြစ်ပြီး၊ မြန်မာဘာသာစကားကို အလွန်ညက်ညောစွာ နားလည်ပြီး စာတမ်းအချက်အလက်များကို မြန်မာလို အကျဉ်းချုပ်ခိုင်းရန် အထူးကောင်းမွန်ပါသည်။</p>
+        </div>
+        <a href="https://gemini.google.com" target="_blank">Gemini သို့ဝင်ရန် →</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <div class="card-meta"><span class="card-icon">💻</span><h3>Microsoft Copilot</h3></div>
+          <p>GPT-4 နည်းပညာကို အခြေခံထားပြီး အင်တာနက်ပေါ်ရှိ နောက်ဆုံးပေါ် ကျမ်းဂန်အချက်အလက်များကို ရှာဖွေကိုးကားကာ စာတမ်းရေးသားရန် ကူညီပေးမည့် AI ဖြစ်ပါသည်။</p>
+        </div>
+        <a href="https://copilot.microsoft.com" target="_blank">Copilot သို့ဝင်ရန် →</a>
+      </div>
+
     </div>
 
-    <div class="card">
-      <div>
-        <div class="card-meta">
-          <span class="card-icon">📚</span>
-          <h3>Zotero</h3>
-        </div>
-        <p>မိမိရေးသားမည့် စာတမ်းပါ ကိုးကားချက်များကို APA, MLA, Chicago စသည့် ပုံစံများဖြင့် စနစ်တကျ စီမံခန့်ခွဲသိမ်းဆည်းပေးမည့် ကျမ်းကိုးမန်နေဂျာ ဖြစ်ပါသည်။</p>
-      </div>
-      <a href="https://www.zotero.org" target="_blank">Zotero သို့ဝင်ရန် →</a>
-    </div>
+    <div class="category-title">🛠️ ကျမ်းကိုးစီမံခန့်ခွဲမှုနှင့် အချက်အလက်ပြုပြင်ရေး Tool များ</div>
+    <div class="grid-container">
 
-    <div class="card">
-      <div>
-        <div class="card-meta">
-          <span class="card-icon">💬</span>
-          <h3>Claude.ai</h3>
+      <div class="card">
+        <div>
+          <div class="card-meta"><span class="card-icon">📚</span><h3>Zotero</h3></div>
+          <p>မိမိရေးသားမည့် စာတမ်းပါ ကိုးကားချက်များကို APA, MLA, Chicago စသည့် ပုံစံများဖြင့် စနစ်တကျ စီမံခန့်ခွဲသိမ်းဆည်းပေးမည့် ကျမ်းကိုးမန်နေဂျာ ဖြစ်ပါသည်။</p>
         </div>
-        <p>နက်ရှိုင်းလှသော ဒဿနပိုင်းဆိုင်ရာများနှင့် ပညာရပ်ဆိုင်ရာ အချက်အလက်များကို ဆွေးနွေးမေးမြန်းရန် အထူးသင့်လျော်သော AI စကားပြောလက်ထောက် ဖြစ်ပါသည်။</p>
+        <a href="https://www.zotero.org" target="_blank">Zotero သို့ဝင်ရန် →</a>
       </div>
-      <a href="https://claude.ai" target="_blank">Claude သို့ဝင်ရန် →</a>
-    </div>
 
-    <div class="card">
-      <div>
-        <div class="card-meta">
-          <span class="card-icon">🎓</span>
-          <h3>Google Scholar</h3>
+      <div class="card">
+        <div>
+          <div class="card-meta"><span class="card-icon">📊</span><h3>OpenRefine</h3></div>
+          <p>ရှုပ်ထွေးနေသော သုတေသနအချက်အလက် (Data) များကို စနစ်တကျ သန့်စင်ပြင်ဆင်ပြီး ဇယားများအဖြစ် ပြုပြင်ပြောင်းလဲပေးမည့် အခမဲ့ကိရိယာ ဖြစ်ပါသည်။</p>
         </div>
-        <p>ဗုဒ္ဓဘာသာလေ့လာမှုဆိုင်ရာ ပညာရပ်ဆိုင်ရာ ဆောင်းပါးများ၊ စာတမ်းများနှင့် စာအုပ်စာတမ်းများကို အလွယ်တကူ ရှာဖွေနိုင်သည့် ကမ္ဘာသုံးအင်ဂျင် ဖြစ်ပါသည်။</p>
+        <a href="https://openrefine.org" target="_blank">OpenRefine သို့ဝင်ရန် →</a>
       </div>
-      <a href="https://scholar.google.com" target="_blank">Google Scholar သို့ဝင်ရန် →</a>
-    </div>
 
-    <div class="card">
-      <div>
-        <div class="card-meta">
-          <span class="card-icon">📊</span>
-          <h3>OpenRefine</h3>
+      <div class="card">
+        <div>
+          <div class="card-meta"><span class="card-icon">📝</span><h3>Mendeley</h3></div>
+          <p>Elsevier ကုမ္ပဏီမှ ထုတ်လုပ်ထားသော ကျမ်းကိုးကိုးကားစနစ် (Reference Manager) ဖြစ်ပြီး စာတမ်းများကို PDF ဖတ်ရှုမှတ်သားရန်နှင့် ကိုးကားရန် ကောင်းမွန်ပါသည်။</p>
         </div>
-        <p>ရှုပ်ထွေးနေသော သုတေသနအချက်အလက် (Data) များကို စနစ်တကျ သန့်စင်ပြင်ဆင်ပြီး ဇယားများအဖြစ် ပြုပြင်ပြောင်းလဲပေးမည့် အခမဲ့ကိရိယာ ဖြစ်ပါသည်။</p>
+        <a href="https://www.mendeley.com" target="_blank">Mendeley သို့ဝင်ရန် →</a>
       </div>
-      <a href="https://openrefine.org" target="_blank">OpenRefine သို့ဝင်ရန် →</a>
-    </div>
 
-    <div class="card">
-      <div>
-        <div class="card-meta">
-          <span class="card-icon">🕸️</span>
-          <h3>Connected Papers</h3>
+      <div class="card">
+        <div>
+          <div class="card-meta"><span class="card-icon">🖋️</span><h3>QuillBot AI</h3></div>
+          <p>စာတမ်းများ ရေးသားရာတွင် မိမိရေးထားသော အင်္ဂလိပ်စာသားများကို ပိုမိုပညာရပ်ဆန်ပြီး ကြည့်ကောင်းအောင် စာလုံးပုံစံပြောင်းလဲ (Paraphrase) ရေးသားပေးမည့် AI ဖြစ်ပါသည်။</p>
         </div>
-        <p>မိမိဖတ်ရှုနေသော စာတမ်းနှင့် ဆက်စပ်နေသည့် အခြားသော ကျမ်းကိုးစာတမ်းများကို ကွန်ရက်မြေပုံသဏ္ဌာန်ဖြင့် အမြင်အာရုံစိုက် ရှာဖွေပေးသည့် စနစ် ဖြစ်ပါသည်။</p>
+        <a href="https://quillbot.com" target="_blank">QuillBot သို့ဝင်ရန် →</a>
       </div>
-      <a href="https://www.connectedpapers.com" target="_blank">Connected Papers သို့ဝင်ရန် →</a>
+
+      <div class="card">
+        <div>
+          <div class="card-meta"><span class="card-icon">✍️</span><h3>Grammarly AI</h3></div>
+          <p>စာတမ်းများ၏ အင်္ဂလိပ်သဒ္ဒါ (Grammar) အမှားများ၊ စာလုံးပေါင်းအမှားများနှင့် ရေးသားမှုအသုံးအနှုန်းများကို လိုက်လံစစ်ဆေး ပြုပြင်ပေးသည့် စနစ်ဖြစ်ပါသည်။</p>
+        </div>
+        <a href="https://www.grammarly.com" target="_blank">Grammarly သို့ဝင်ရန် →</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <div class="card-meta"><span class="card-icon">📂</span><h3>ChatPDF</h3></div>
+          <p>ပိဋကတ်တော် သို့မဟုတ် သုတေသန PDF စာအုပ်ကြီးများကို Upload တင်ပြီး ၎င်းစာအုပ်ထဲက အချက်အလက်များကို AI အား စာအုပ်အညွှန်း မေးမြန်းနိုင်သည့် စနစ်ဖြစ်ပါသည်။</p>
+        </div>
+        <a href="https://www.chatpdf.com" target="_blank">ChatPDF သို့ဝင်ရန် →</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <div class="card-meta"><span class="card-icon">🎨</span><h3>Gamma App</h3></div>
+          <p>သုတေသနပြုထားသော အချက်အလက်များကို စက္ကန့်ပိုင်းအတွင်း ဆွဲဆောင်မှုရှိသော Presentation Slide သို့မဟုတ် ဝဘ်စာမျက်နှာအဖြစ် ပြောင်းလဲပေးသည့် AI ဖြစ်ပါသည်။</p>
+        </div>
+        <a href="https://gamma.app" target="_blank">Gamma AI သို့ဝင်ရန် →</a>
+      </div>
+
     </div>
 
   </div>
+
+  <footer>
+    <p>&copy; 2026 Buddhist Academic AI Research Platform. Developed for Academic Excellence.</p>
+  </footer>
 
 </body>
 </html>
