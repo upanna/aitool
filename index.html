@@ -1,216 +1,228 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="my">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Buddhist AI Research Tools</title>
+  <title>ဗုဒ္ဓဘာသာဆိုင်ရာ AI သုတေသနပြုကိရိယာများ</title>
   <style>
+    /* Modern Typography & Reset */
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Myanmar:wght@300;400;500;700&display=swap');
+
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
+      font-family: 'Noto Sans Myanmar', Arial, sans-serif;
+      background-color: #fdfbf7; /* ဖုန်ကတ္တီပါရောင်နု */
       margin: 0;
       padding: 0;
-      line-height: 1.6;
-      color: #333;
-    }
-    header {
-      background-color: #00695c; /* Dark Green */
-      color: white;
-      padding: 30px 20px; /* Adjust padding to give more space */
-      text-align: center;
-      position: relative;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-    h1 {
-      font-size: 2.5em;
-      margin-bottom: 10px;
-    }
-    p.tagline {
-      font-size: 1.1em;
-      opacity: 0.9;
-      margin-bottom: 20px; /* Added margin for spacing */
-    }
-    h5.creator-info {
-      text-align: right;
-      font-size: 0.8em;
-      color: rgba(255, 255, 255, 0.7);
-      margin-top: 30px; /* More space for creator info */
+      line-height: 1.8;
+      color: #2d3436;
     }
 
-    /* CSE native elements များကို AI Chat Box input/button ပုံစံအတိုင်း ပြင်ဆင်ခြင်း */
+    /* Premium Traditional Gradient Header */
+    header {
+      background: linear-gradient(135deg, #4a020d 0%, #700918 50%, #a87e24 100%);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      border-bottom: 4px solid #a87e24;
+    }
+
+    h1 {
+      font-size: 2.3em;
+      margin-bottom: 10px;
+      font-weight: 700;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+      color: #fff;
+    }
+
+    p.tagline {
+      font-size: 1.1em;
+      opacity: 0.95;
+      margin-bottom: 25px;
+      font-weight: 300;
+      color: #f1ebd9;
+    }
+
+    /* Google Custom Search Box Styling */
+    .gcse-search-container-main {
+      max-width: 650px;
+      margin: 0 auto 15px auto;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 10px;
+      border-radius: 30px;
+      backdrop-filter: blur(5px);
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+    h5.creator-info {
+      text-align: right;
+      font-size: 0.85em;
+      color: rgba(255, 255, 255, 0.85);
+      margin-top: 20px;
+      max-width: 1100px;
+      margin-left: auto;
+      margin-right: auto;
+      font-weight: 400;
+      line-height: 1.5;
+    }
+
+    /* CSE native elements customization */
     .gsc-control-cse {
       padding: 0 !important;
-      width: 100%; /* Make search control take full width of its container */
-      display: flex; /* Flexbox for aligning input and button */
-      align-items: center; /* Vertically center items */
-      gap: 10px; /* Space between input and button */
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: transparent !important;
+      border: none !important;
     }
+
     .gsc-search-box {
       margin-bottom: 0 !important;
-      flex-grow: 1; /* Allow input to grow and take available space */
+      flex-grow: 1;
     }
+
     input.gsc-input {
-      padding: 15px !important; /* AI Chat Box input ရဲ့ padding ကို ယူထားတာ */
-      border-radius: 3px !important; /* AI Chat Box input ရဲ့ border-radius ကို ယူထားတာ */
-      border: none !important; /* border ဖယ်ရှားခြင်း */
+      padding: 12px 20px !important;
+      border-radius: 25px !important;
+      border: none !important;
       height: auto !important;
-      min-height: unset !important;
       box-sizing: border-box;
-      font-size: 1em !important; /* AI Chat Box input ရဲ့ font-size ကို ယူထားတာ */
-      outline: none; /* Remove default outline on focus */
+      font-size: 1em !important;
+      outline: none;
+      background: #ffffff !important;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1) !important;
     }
-    button.gsc-search-button {
-      padding: 10px 15px !important; /* AI Chat Box button ရဲ့ padding ကို ယူထားတာ */
-      border-radius: 5px !important; /* AI Chat Box button ရဲ့ border-radius ကို ယူထားတာ */
-      border: none !important; /* border ဖယ်ရှားခြင်း */
-      background-color: #0288d1 !important; /* Blue button */
-      color: white !important;
-      cursor: pointer;
-      font-size: 1em !important; /* AI Chat Box button ရဲ့ font-size ကို ယူထားတာ */
-      min-width: unset !important;
-      height: unset !important;
+
+    .gsc-input-box {
+      border: none !important;
+      box-shadow: none !important;
+      background: transparent !important;
     }
-    .gsc-input-box { /* The container for the input field and search button */
-      border: none !important; /* Remove default border from gsc-input-box */
-      box-shadow: none !important; /* Remove default shadow */
-      background: transparent !important; /* Make background transparent */
-    }
+
     .gsc-search-button-v2 {
-        padding: 0 10px !important; /* Icon button padding */
-        background-color: #0288d1 !important;
-        border-radius: 5px !important;
+      padding: 12px 22px !important;
+      background-color: #a87e24 !important; /* Gold Button */
+      border-radius: 25px !important;
+      border: 1px solid #fff !important;
+      transition: background 0.3s ease;
     }
+
+    .gsc-search-button-v2:hover {
+      background-color: #bd9033 !important;
+    }
+
     .gsc-search-button-v2 svg {
-        fill: white !important;
+      fill: white !important;
     }
-    /* Hide the default Google branding and other texts */
+
     .gsc-branding, .gsc-overflow-check {
-        display: none !important;
+      display: none !important;
     }
 
     /* Main Content Grid */
     .container {
-      padding: 25px;
+      padding: 30px 20px;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Auto-fit columns for responsiveness */
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 25px;
       max-width: 1100px;
-      margin: 25px auto;
+      margin: 20px auto;
     }
+
     .card {
       background-color: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      border: 1px solid #f0e6cc;
+      position: relative;
+      overflow: hidden;
     }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background-color: #700918; /* ကတ္တီပါနီ ကတ်ဘေးလိုင်း */
+    }
+
     .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+      transform: translateY(-6px);
+      box-shadow: 0 10px 25px rgba(112, 9, 24, 0.1);
+      border-color: #a87e24;
     }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .card-icon {
+      font-size: 1.5em;
+    }
+
     .card h3 {
-      margin-top: 0;
-      color: #00695c;
-      font-size: 1.4em;
-      margin-bottom: 10px;
+      margin: 0;
+      color: #700918;
+      font-size: 1.3em;
+      font-weight: 700;
     }
+
     .card p {
       font-size: 0.95em;
       color: #555;
       flex-grow: 1;
+      text-align: justify;
+      margin-bottom: 20px;
     }
+
     .card a {
       display: inline-block;
-      margin-top: 15px;
-      color: #0288d1;
+      padding: 10px 18px;
+      background-color: #fcf8ee;
+      color: #a87e24;
       text-decoration: none;
       font-weight: bold;
-      transition: color 0.3s ease;
+      border-radius: 8px;
+      text-center: center;
+      transition: all 0.3s ease;
+      border: 1px solid #f0e6cc;
+      font-size: 0.9em;
     }
+
     .card a:hover {
-      text-decoration: underline;
-      color: #0277bd;
-    }
-    .card.full-width {
-      grid-column: 1 / -1; /* Take full width of the grid */
-      padding: 0;
-      overflow: hidden;
-    }
-    .card.full-width iframe {
-      width: 100%;
-      height: 800px;
-      border: none;
-      border-radius: 12px;
+      background-color: #a87e24;
+      color: white;
+      border-color: #a87e24;
     }
 
-    /* Responsive adjustments for smaller screens (mobile) */
+    /* Responsive adjustments */
     @media (max-width: 768px) {
-      h1 {
-        font-size: 2em; /* Adjust H1 font size for mobile */
-      }
-      p.tagline {
-        font-size: 1em;
-      }
-      header {
-        padding: 20px 15px; /* Adjust header padding for mobile */
-      }
-      .gcse-search-container-main {
-        width: calc(100% - 30px); /* Full width minus padding on mobile */
-        padding: 10px 15px; /* Adjust padding for mobile */
-      }
-      input.gsc-input {
-        padding: 12px !important; /* Adjust input padding for mobile */
-      }
-      button.gsc-search-button {
-        padding: 8px 12px !important; /* Adjust button padding for mobile */
-      }
-      .container {
-        padding: 15px; /* Adjust main container padding for mobile */
-        gap: 15px; /* Adjust gap between cards for mobile */
-      }
-      .card {
-        padding: 15px; /* Adjust card padding for mobile */
-      }
-      .card h3 {
-        font-size: 1.2em; /* Adjust card title font size for mobile */
-      }
-      .card p {
-        font-size: 0.9em; /* Adjust card paragraph font size for mobile */
-      }
-      .card a {
-        font-size: 0.9em; /* Adjust card link font size for mobile */
-      }
-      .card.full-width iframe {
-        height: 500px; /* Adjust iframe height for mobile */
-      }
-    }
-
-    /* Even smaller screens (e.g., old phones) */
-    @media (max-width: 480px) {
-      h1 {
-        font-size: 1.8em;
-      }
-      .gcse-search-container-main {
-        padding: 8px 10px;
-      }
-      input.gsc-input {
-        font-size: 0.9em !important;
-      }
-      button.gsc-search-button {
-        font-size: 0.9em !important;
-      }
+      h1 { font-size: 1.8em; }
+      p.tagline { font-size: 1em; }
+      header { padding: 30px 15px; }
+      .container { padding: 15px; gap: 20px; }
+      .card { padding: 20px; }
     }
   </style>
 </head>
 <body>
+
   <header>
-    <h1>Buddhist Academic AI Research Tools</h1>
-    <p class="tagline">Explore and utilize AI-powered platforms for Buddhist studies and research</p>
+    <h1>ဗုဒ္ဓစာပေဆိုင်ရာ AI သုတေသနပြုစနစ်များ</h1>
+    <p class="tagline">ဗုဒ္ဓေဘာသာစာပေ လေ့လာခြင်းနှင့် သုတေသနလုပ်ငန်းများအတွက် အဆင့်မြင့် AI နည်းပညာများကို စုစည်းမှု</p>
     
-    <!-- Google Custom Search Engine (CSE) - Main Search Box -->
     <div class="gcse-search-container-main">
         <script async src="https://cse.google.com/cse.js?cx=d620609ec350f4548"></script>
         <div class="gcse-search"></div>
@@ -220,54 +232,95 @@
   </header>
 
   <div class="container">
+    
     <div class="card">
-      <h3>Elicit.org</h3>
-      <p>AI research assistant that extracts academic answers and citation-backed evidence from papers.</p>
-      <a href="https://elicit.org" target="_blank">Visit Elicit</a>
+      <div>
+        <div class="card-meta">
+          <span class="card-icon">🔍</span>
+          <h3>Elicit.org</h3>
+        </div>
+        <p>သုတေသနစာတမ်းများထဲမှ ပညာရပ်ဆိုင်ရာ အဖြေများနှင့် ကိုးကားချက် အထောက်အထားများကို လွယ်ကူစွာ ရှာဖွေထုတ်ယူပေးမည့် AI လက်ထောက်စနစ် ဖြစ်ပါသည်။</p>
+      </div>
+      <a href="https://elicit.org" target="_blank">Elicit သို့ဝင်ရန် →</a>
     </div>
+
     <div class="card">
-      <h3>SuttaCentral</h3>
-      <p>Access canonical texts from Theravāda, Mahāyāna, and Vajrayāna traditions with translations.</p>
-      <a href="https://suttacentral.net" target="_blank">Visit SuttaCentral</a>
+      <div>
+        <div class="card-meta">
+          <span class="card-icon">🪷</span>
+          <h3>SuttaCentral</h3>
+        </div>
+        <p>ထေရဝါဒ၊ မဟာယာနနှင့် ဝဇီရယာန ဓမ္မဘာသာပြန်ကျမ်းစာများကို ဘာသာစကားမျိုးစုံဖြင့် တိုက်ရိုက်ဖတ်ရှုလေ့လာနိုင်သော ပိဋကတ်စာပေဗဟိုချက် ဖြစ်ပါသည်။</p>
+      </div>
+      <a href="https://suttacentral.net" target="_blank">SuttaCentral သို့ဝင်ရန် →</a>
     </div>
+
     <div class="card">
-      <h3>Perplexity AI</h3>
-      <p>Search engine powered by AI with scholarly citation support and academic mode.</p>
-      <a href="https://www.perplexity.ai" target="_blank">Visit Perplexity</a>
+      <div>
+        <div class="card-meta">
+          <span class="card-icon">🤖</span>
+          <h3>Perplexity AI</h3>
+        </div>
+        <p>ခိုင်လုံသော စာတမ်းကိုးကားချက်များကို စက္ကန့်ပိုင်းအတွင်း ရှာဖွေဖော်ပြပေးနိုင်သည့် Scholarly Mode ပါဝင်သော အဆင့်မြင့် AI Search Engine ဖြစ်ပါသည်။</p>
+      </div>
+      <a href="https://www.perplexity.ai" target="_blank">Perplexity သို့ဝင်ရန် →</a>
     </div>
+
     <div class="card">
-      <h3>Buddha AI</h3>
-      <p>An AI assistant specifically designed for answering questions and providing insights on Buddhist teachings and scriptures.</p>
-      <a href="https://example.com/buddha-ai" target="_blank">Visit Buddha AI</a>
+      <div>
+        <div class="card-meta">
+          <span class="card-icon">📚</span>
+          <h3>Zotero</h3>
+        </div>
+        <p>မိမိရေးသားမည့် စာတမ်းပါ ကိုးကားချက်များကို APA, MLA, Chicago စသည့် ပုံစံများဖြင့် စနစ်တကျ စီမံခန့်ခွဲသိမ်းဆည်းပေးမည့် ကျမ်းကိုးမန်နေဂျာ ဖြစ်ပါသည်။</p>
+      </div>
+      <a href="https://www.zotero.org" target="_blank">Zotero သို့ဝင်ရန် →</a>
     </div>
+
     <div class="card">
-      <h3>Zotero</h3>
-      <p>Reference manager for organizing research citations in APA, MLA, or Chicago format.</p>
-      <a href="https://www.zotero.org" target="_blank">Visit Zotero</a>
+      <div>
+        <div class="card-meta">
+          <span class="card-icon">💬</span>
+          <h3>Claude.ai</h3>
+        </div>
+        <p>နက်ရှိုင်းလှသော ဒဿနပိုင်းဆိုင်ရာများနှင့် ပညာရပ်ဆိုင်ရာ အချက်အလက်များကို ဆွေးနွေးမေးမြန်းရန် အထူးသင့်လျော်သော AI စကားပြောလက်ထောက် ဖြစ်ပါသည်။</p>
+      </div>
+      <a href="https://claude.ai" target="_blank">Claude သို့ဝင်ရန် →</a>
     </div>
+
     <div class="card">
-      <h3>Claude.ai</h3>
-      <p>AI chat assistant designed for deep, philosophical, and academic conversation.</p>
-      <a href="https://claude.ai" target="_blank">Visit Claude</a>
+      <div>
+        <div class="card-meta">
+          <span class="card-icon">🎓</span>
+          <h3>Google Scholar</h3>
+        </div>
+        <p>ဗုဒ္ဓဘာသာလေ့လာမှုဆိုင်ရာ ပညာရပ်ဆိုင်ရာ ဆောင်းပါးများ၊ စာတမ်းများနှင့် စာအုပ်စာတမ်းများကို အလွယ်တကူ ရှာဖွေနိုင်သည့် ကမ္ဘာသုံးအင်ဂျင် ဖြစ်ပါသည်။</p>
+      </div>
+      <a href="https://scholar.google.com" target="_blank">Google Scholar သို့ဝင်ရန် →</a>
     </div>
+
     <div class="card">
-      <h3>Google Scholar</h3>
-      <p>Academic search engine to locate scholarly articles and citations on Buddhist studies.</p>
-      <a href="https://scholar.google.com" target="_blank">Visit Google Scholar</a>
+      <div>
+        <div class="card-meta">
+          <span class="card-icon">📊</span>
+          <h3>OpenRefine</h3>
+        </div>
+        <p>ရှုပ်ထွေးနေသော သုတေသနအချက်အလက် (Data) များကို စနစ်တကျ သန့်စင်ပြင်ဆင်ပြီး ဇယားများအဖြစ် ပြုပြင်ပြောင်းလဲပေးမည့် အခမဲ့ကိရိယာ ဖြစ်ပါသည်။</p>
+      </div>
+      <a href="https://openrefine.org" target="_blank">OpenRefine သို့ဝင်ရန် →</a>
     </div>
+
     <div class="card">
-      <h3>OpenRefine</h3>
-      <p>Data cleaning tool for refining and organizing messy research datasets.</p>
-      <a href="https://openrefine.org" target="_blank">Visit OpenRefine</a>
+      <div>
+        <div class="card-meta">
+          <span class="card-icon">🕸️</span>
+          <h3>Connected Papers</h3>
+        </div>
+        <p>မိမိဖတ်ရှုနေသော စာတမ်းနှင့် ဆက်စပ်နေသည့် အခြားသော ကျမ်းကိုးစာတမ်းများကို ကွန်ရက်မြေပုံသဏ္ဌာန်ဖြင့် အမြင်အာရုံစိုက် ရှာဖွေပေးသည့် စနစ် ဖြစ်ပါသည်။</p>
+      </div>
+      <a href="https://www.connectedpapers.com" target="_blank">Connected Papers သို့ဝင်ရန် →</a>
     </div>
-    <div class="card">
-      <h3>Connectedpapers</h3>
-      <p>Data researching tool for refining and organizing messy research datasets.</p>
-      <a href="https://www.connectedpapers.com" target="_blank">Visit Connectedpapers</a>
-    </div>
-    <div class="card full-width">
-      <iframe src="https://digitalpalireader.online/_dprhtml/index.html"></iframe>
-    </div>
+
   </div>
 
 </body>
